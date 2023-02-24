@@ -35,7 +35,7 @@ function getUser($id) {
 function saveUser($email, $username, $password) {
     $connexion = connectDb();
 	$passwordHash = password_hash($password, PASSWORD_DEFAULT);
-    $sql = 'INSERT INTO users(username,email,password) VALUES("'.$email.'","'.$username.'","'.$passwordHash.'")';
+    $sql = 'INSERT INTO users(username,email,password) VALUES("'.htmlentities($email).'","'.htmlentities($username).'","'.htmlentities($passwordHash).'	';
     $stmt = $connexion->prepare($sql);
 
     return $stmt->execute();

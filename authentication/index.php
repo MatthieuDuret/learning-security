@@ -3,11 +3,16 @@ require_once('functions.php');
 session_start();
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 if (isset($_GET['email']) && isset($_GET['password'])) {
-    $users = logUser($_GET['email'], $_GET['password']);
+	$mdpBDD = checkLogUser($_GET['email']);
+	
+	if(password_verify($_GET['password'],$mdpBDD[0]->password)) {
+         $users = logUser($_GET['email'], $_GET['password']);
     if(!empty($users)) {
         $user = $users[0];
         $_SESSION['user'] = $user;
     }
+    }
+   
 }
 ?>
 
