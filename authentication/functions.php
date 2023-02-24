@@ -13,30 +13,14 @@ function connectDb()
     }
 }
 
-function logUser($email, $password)
-{
-    $connexion = connectDb();
-    $sql = 'SELECT * FROM users WHERE email = "' . $email . '" AND password = "' .$password . '"';
-    $stmt = $connexion->prepare($sql);
-    $stmt->execute();
 
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
-}
 
-function getUser($id) {
-    $connexion = connectDb();
-    $sql = 'SELECT * FROM users WHERE id = ' . $id;
-    $stmt = $connexion->prepare($sql);
-    $stmt->execute();
-
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
-}
-
-function saveUser($email, $username, $password) {
+function saveUser($username, $email, $password) {
     $connexion = connectDb();
 	$passwordHash = password_hash($password, PASSWORD_DEFAULT);
-    $sql = 'INSERT INTO users(username,email,password) VALUES("'.htmlentities($email).'","'.htmlentities($username).'","'.htmlentities($passwordHash).'	';
+    $sql = 'INSERT INTO users(username,email,password) VALUES("'.htmlentities($email).'","'.htmlentities($username).'","'.$passwordHash.'")';
     $stmt = $connexion->prepare($sql);
 
     return $stmt->execute();
 }
+
