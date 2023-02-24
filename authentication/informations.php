@@ -1,12 +1,13 @@
 <?php
 require_once('functions.php');
-$user = null;
-if(isset($_GET['id'])) {
-    $users = getUser($_GET['id']);
+session_start();
+$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+
     if(!empty($users)) {
         $user = $users[0];
-    }
-}
+        $_SESSION['user'] = $user;
+    
+	}
 ?>
 
 <?php if($user): ?>
