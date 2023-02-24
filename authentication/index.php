@@ -28,7 +28,7 @@ if (isset($_GET['email']) && isset($_GET['password'])) {
 <div class="container">
     <?php if(!$user): ?>
     <h1>Connexion</h1>
-    <form action="/" method="GET">
+    <form action="/learning-security/authentication" method="GET">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -48,7 +48,7 @@ if (isset($_GET['email']) && isset($_GET['password'])) {
     <?php else: ?>
         <h1>Bienvenue <?= $user->email ?></h1>
     <a href="informations.php?id=<?= $user->id ?>">Mes informations</a><br/>
-    <a href="logout.php">Logout</a>
+    <a href="/learning-security/authentication/logout.php">Logout</a>
     <?php endif ?>
 </div>
 </body>
