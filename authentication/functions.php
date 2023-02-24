@@ -13,6 +13,34 @@ function connectDb()
     }
 }
 
+function logUser($email, $password)
+{
+    $connexion = connectDb();
+    $sql = 'SELECT * FROM users WHERE email = "' . $email . '" AND password = "' .$password . '"';
+    $stmt = $connexion->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+function checkLogUser($email)
+{
+    $connexion = connectDb();
+    $sql = 'SELECT password FROM users WHERE email = "' . $email . '" LIMIT 1';
+    $stmt = $connexion->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+function getUser($id) {
+    $connexion = connectDb();
+    $sql = $connexion->prepare('SELECT * FROM users WHERE id =  ?' );
+    $sql->bindParam(1,$id);
+    $sql->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
 
 
 function saveUser($username, $email, $password) {
